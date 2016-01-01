@@ -1,5 +1,5 @@
-FROM alpine:3.2
-MAINTAINER Andreas Linz "klingt.net@gmail.com"
+FROM miek/alpine-armv6l
+MAINTAINER Bradley Bossard <bradleybossard@gmail.com>
 
 # install requirements
 RUN apk update &&\
@@ -8,8 +8,9 @@ RUN apk update &&\
             flac\
             curl
 
-RUN pip3 install --upgrade pip &&\
-    pip3 install cherrypy &&\
+# TODO(bradleybossard) : Figure out why updating pip causes build to fail
+#RUN pip3 install --upgrade pip &&\
+RUN pip3 install cherrypy &&\
     pip3 install cherrymusic
 
 ADD cherrymusic.conf /root/.config/cherrymusic/cherrymusic.conf
